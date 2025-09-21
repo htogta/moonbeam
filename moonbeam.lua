@@ -1,12 +1,4 @@
 local VERSION = "0.1.0"
--- open lua file and get source code
-
--- put beginning of template data
-
--- line by line of lua source, append an "sbuilder_append(line)"
---   (don't forget to escape certain chars, like \, ", etc)
-
--- put the ending part of the template
 
 function template_head()
   return [[
