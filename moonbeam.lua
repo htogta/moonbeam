@@ -206,15 +206,17 @@ f:close()
 -- convert to C code
 local c_source = lua_to_c(source)
 
-if c_only then
-  -- write to file.c, then exit
-  local cfilename = input_file:gsub("%.lua$", "") .. ".c"
-  local cfile = io.open(cfilename, "w")
-  cfile:write(c_source)
-  cfile:close()
-  os.exit(0)
-end
+local cfilename = input_file:gsub("%.lua$", "") .. ".c"
+local cfile = io.open(cfilename, "w")
+cfile:write(c_source)
+cfile:close()
+if c_only then os.exit(0) end
 
--- otherwise, write to temp C file, compile it with cc, then exit TODO
-print("TODO: compiling directly not yet supported")
-os.exit(1)
+-- otherwise, compile it with cc, remove the .c file, then exit
+local command = string.format("cc -o %s %s", cfilename:gsub("%.c$", ""), cfilename)
+command = command .. " lua/liblua.a -Ilua -lm -ldl"
+local ret = os.execute(command) -- TODO how to handle this failing?
+
+-- now to remove the .c file:
+local ok, err = os.remove(cfilename)
+if not ok then print("Failed to delete " .. cfilename) os.exit(1) end
