@@ -1,0 +1,26 @@
+= moonbeam
+
+Moonbeam is a (rather sketchy) way of compiling a single Lua script into a 
+single executable.
+
+== usage
+
+```
+moonbeam script.lua
+```
+
+This creates a standalone executable file called `script` that you can run that 
+does exactly the same thing that `script.lua` does.
+
+```
+moonbeam -c script.lua
+```
+
+This outputs a C program (`script.c`) that contains the source code of 
+`script.lua` inside it, stored in a heap-allocated string. The C program (which
+includes the Lua interpreter) then interprets this string as Lua source code,
+which you can compile as a standalone executable by compiling with `cc` and 
+linking with Lua. See `template.c` for an example of what this output might
+look like.
+
+Run `moonbeam -h` for more information
