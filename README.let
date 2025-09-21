@@ -5,8 +5,14 @@ single executable.
 
 == compiling from source
 
-To build your own copy, you can run `just bootstrap` to bootstrap a copy of the
-moonbeam executable.
+First, clone the repository and its submodules with:
+
+```
+git clone --recurse-submodules <repo-url>
+```
+
+Then, navigate to the repository folder. To build your own copy, you can run 
+`just bootstrap` to bootstrap a copy of the moonbeam executable.
 
 == usage
 
