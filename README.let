@@ -3,6 +3,11 @@
 Moonbeam is a (rather sketchy) way of compiling a single Lua script into a 
 single executable.
 
+== compiling from source
+
+To build your own copy, you can run `just bootstrap` to bootstrap a copy of the
+moonbeam executable.
+
 == usage
 
 ```
